@@ -7,7 +7,9 @@
 ## Description:
 
 This application allows the user to enter the location and it gives the weather report.
-![Screenshot](img/screeshot.png)
+
+![Screenshot](https://github.com/priyaraj7/weather/raw/master/img/Screenshot.png)
+
 ## Setup/Installation Requirements
 
 - Open the Terminal
