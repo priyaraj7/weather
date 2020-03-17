@@ -3,48 +3,20 @@ import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
+import { WeatherService } from "./../src/weather-service.js";
+
 $(document).ready(function() {
   $("#weatherLocation").click(function() {
     const city = $("#location").val();
     $("#location").val("");
 
-    // (async () => {
-    //   try {
-    //     let response = await fetch(
-    //       `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`
-    //     );
-    //     let jsonifiedResponse;
-    //     if (response.ok && response.status == 200) {
-    //       jsonifiedResponse = await response.json();
-    //     } else {
-    //       jsonifiedResponse = false;
-    //     }
-    //     getElements(jsonifiedResponse);
-    //   } catch (e) {
-    //     getElements(false);
-    //   }
-    // })();
+    (async () => {
+      let weatherService = new WeatherService();
+      const response = await weatherService.getWeatherByCity(city);
+      getElements(response);
+    })();
 
-    // const asyncApiCall = async () => {
-    //   try {
-    //     let response = await fetch(
-    //       `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.API_KEY}`
-    //     );
-    //     let jsonifiedResponse;
-    //     if (response.ok && response.status == 200) {
-    //       jsonifiedResponse = await response.json();
-    //     } else {
-    //       jsonifiedResponse = false;
-    //     }
-    //     getElements(jsonifiedResponse);
-    //   } catch (e) {
-    //     getElements(false);
-    //   }
-    // };
-
-    asyncApiCall();
-
-    const getElements = function(response) {
+    function getElements(response) {
       if (response) {
         $(".showHumidity").text(
           `The humidity in ${city} is ${response.main.humidity}%`
@@ -56,7 +28,7 @@ $(document).ready(function() {
         $(".showHumidity").text(`There was an error handling your request.`);
         $(".showTemp").text(`Please check your inputs and try again!`);
       }
-    };
+    }
   });
 });
 

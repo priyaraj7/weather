@@ -11,7 +11,7 @@ export class WeatherService {
         jsonifiedResponse = false;
       }
       return jsonifiedResponse;
-    } catch {
+    } catch (e) {
       return false;
     }
   }
